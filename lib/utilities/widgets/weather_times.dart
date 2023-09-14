@@ -12,13 +12,25 @@ class WeatherTimes extends StatefulWidget {
   State<WeatherTimes> createState() => _WeatherTimesState();
 }
 
+
+
 class _WeatherTimesState extends State<WeatherTimes> {
   @override
   Widget build(BuildContext context) {
+    final isMorning =  widget.time! >= 6 && widget.time! < 15; // 6 AM to 2:59 PM
+    final isEvening = widget.time! >= 15 && widget.time! <= 18; // 3 PM to 5:59 PM
+    Color backgroundColor;
+    if (isMorning) {
+      backgroundColor = Colors.white.withOpacity(0.3);
+    } else if (isEvening) {
+      backgroundColor = Colors.orange.withOpacity(0.55);
+    } else {
+      backgroundColor = Colors.black;
+    }
     return Container(
       height: Get.height * 0.3,
       decoration: BoxDecoration(
-        color: widget.time! > 12 ? Colors.white.withOpacity(0.4) :Colors.black,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
@@ -28,7 +40,7 @@ class _WeatherTimesState extends State<WeatherTimes> {
             Row(
               children: [
                 Icon(widget.icon,
-                  color: Colors.white
+                  color: Colors.white,
                 ),
                 const SizedBox(width: 10,),
                 Text(
@@ -36,6 +48,7 @@ class _WeatherTimesState extends State<WeatherTimes> {
                   style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'Fabrica',
+                    fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
                 ),

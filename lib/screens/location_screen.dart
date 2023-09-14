@@ -72,9 +72,6 @@ class _LocationScreenState extends State<LocationScreen> {
         double vis = weatherdata['visibility'].toDouble();
         double deg = weatherdata['wind']['deg'].toDouble();
         double spe = weatherdata['wind']['speed'].toDouble();
-        if (kDebugMode) {
-          print(temp);
-        }
         temprature = temp.toInt();
         tempratureMin = tempMin.toInt();
         tempratureMax = tempMax.toInt();
@@ -107,9 +104,20 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var fomatedTime = DateFormat('hh').format(time);
+    var fomatedTime = DateFormat('HH').format(time);
     int finalTime = int.tryParse(fomatedTime) ?? 0;
+    // int finalTime = 10;
     double dewPoint = temprature! - ((100 - humidity!) / 5);
+    final isMorning = finalTime >= 6 && finalTime < 15; // 6 AM to 2:59 PM
+    final isEvening = finalTime >= 15 && finalTime <= 18; // 3 PM to 5:59 PM
+    AssetImage backgroundImage;
+    if (isMorning) {
+      backgroundImage = const AssetImage('images/morning.jpg');
+    } else if (isEvening) {
+      backgroundImage = const AssetImage('images/eve.jpg');
+    } else {
+      backgroundImage = const AssetImage('images/night.jpg');
+    }
     if (kDebugMode) {
       print(finalTime);
     }
@@ -117,9 +125,7 @@ class _LocationScreenState extends State<LocationScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: finalTime > 12
-                ? const AssetImage('images/morning.jpg')
-                : const AssetImage('images/night.jpg'),
+            image: backgroundImage,
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 Colors.white.withOpacity(0.8), BlendMode.dstATop),
@@ -142,7 +148,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       child: Icon(
                         Icons.near_me,
                         size: 50.0,
-                        color: finalTime > 12 ? Colors.white60 : Colors.white,
+                        color: Colors.white,
                       ),
                     ),
                     TextButton(
@@ -162,7 +168,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       child: Icon(
                         Icons.search,
                         size: 50.0,
-                        color: finalTime > 12 ? Colors.white60 : Colors.white,
+                        color:Colors.white,
                       ),
                     ),
                   ],
@@ -198,7 +204,8 @@ class _LocationScreenState extends State<LocationScreen> {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontFamily: 'Spartan MB',
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Fabrica',
                     fontSize: 20,
                   ),
                 ),
@@ -244,6 +251,7 @@ class _LocationScreenState extends State<LocationScreen> {
                               style: const TextStyle(
                                 fontSize: 50,
                                 fontFamily: "Fabrica",
+                                fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
                             ),
@@ -256,6 +264,7 @@ class _LocationScreenState extends State<LocationScreen> {
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontFamily: "Fabrica",
+                                fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
                             ),
@@ -263,7 +272,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         ),
                       )),
                       const SizedBox(
-                        width: 5,
+                        width: 10,
                       ),
                       Expanded(
                           child: WeatherTimes(
@@ -309,7 +318,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         widget: Column(
                           children: [
                             const SizedBox(
-                              height: 15,
+                              height: 20,
                             ),
                             Text(
                               '$humidity%',
@@ -317,18 +326,20 @@ class _LocationScreenState extends State<LocationScreen> {
                               style: const TextStyle(
                                 fontSize: 45,
                                 fontFamily: "Fabrica",
+                                fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
                             ),
                             const SizedBox(
-                              height: 50,
+                              height: 30,
                             ),
                             Text(
                               'The dew point is ${dewPoint.toStringAsFixed(0)} right now.',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                fontSize: 18,
+                                fontSize: 19,
                                 fontFamily: "Fabrica",
+                                fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
                             ),
@@ -336,7 +347,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         ),
                       )),
                       const SizedBox(
-                        width: 5,
+                        width: 10,
                       ),
                       Expanded(
                           child: WeatherTimes(
@@ -417,6 +428,7 @@ class _LocationScreenState extends State<LocationScreen> {
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontSize: 50,
+                                  fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                   fontFamily: "Fabrica"),
                             ),
@@ -429,6 +441,7 @@ class _LocationScreenState extends State<LocationScreen> {
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 20,
+                                        fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontFamily: "Fabrica"),
                                   )
@@ -437,6 +450,7 @@ class _LocationScreenState extends State<LocationScreen> {
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 20,
+                                        fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontFamily: "Fabrica"),
                                   ),

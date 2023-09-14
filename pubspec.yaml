@@ -44,6 +44,7 @@ flutter:
     - images/morning.jpg
     - images/scale.png
     - images/city.jpg
+    - images/eve.jpg
     - images/logo-splash.png
 
   fonts:

@@ -55,7 +55,7 @@ class WeatherModel {
     if (temp > 26) {
       return 'Too Hot Today';
     } else if (temp >= 18 && temp <= 26) {
-      return 'A little Hot Today';
+      return 'A little Warm Today';
     } else if (temp <= 18) {
       return 'Freezy...';
     } else if (temp <= 10) {
