@@ -1,0 +1,56 @@
+name: stormy
+description: A new Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.6
+  geolocator: ^10.0.1
+  http: ^1.1.0
+  flutter_spinkit: ^5.2.0
+  location: ^5.0.3
+  permission_handler: ^11.0.0
+  get: ^4.6.6
+  intl: ^0.18.1
+  vector_math: ^2.0.8
+  flutter_native_splash: ^2.3.2
+  rename: ^2.1.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter_native_splash:
+  color: '#FFFFFF'
+  image: images/logo-splash.png
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - images/night.jpg
+    - images/morning.jpg
+    - images/scale.png
+    - images/city.jpg
+    - images/logo-splash.png
+
+  fonts:
+    - family: Spartan MB
+      fonts:
+        - asset: fonts/SpartanMB-Black.otf
+          weight: 900
+    - family: Fabrica
+      fonts:
+        - asset: fonts/Fabrica-ZOjx.otf
