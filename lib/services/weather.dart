@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'location.dart';
 import 'networking.dart';
-const apiKey = '1f9529aef372df903da9eb24024bc888';
+const apiKey = '';
 const openWeatherURL = 'https://api.openweathermap.org/data/2.5/weather';
 
 class WeatherModel {
